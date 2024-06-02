@@ -1,0 +1,2516 @@
+openapi: 3.0.0
+info:
+  title: HRM
+  description: HRM API Services
+  contact:
+    name: Chandu Pasumarthi
+    url: http://www.chanduthedev.com/
+    email: chanduthedev@gmail.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1
+paths:
+  /employers/{employer_id}/employees/{employee_id}/attendence:
+    post:
+      tags:
+        - attendenceAPIs
+      summary: Checking Time
+      operationId: checking_time_employers__employer_id__employees__employee_id__attendence_post
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: employee_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employee Id
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckInRequestDTO'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckInResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+        - attendenceAPIs
+      summary: Checkout Time
+      operationId: checkout_time_employers__employer_id__employees__employee_id__attendence_patch
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: employee_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employee Id
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckOutRequestDTO'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckOuResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+        - attendenceAPIs
+      summary: Get Attendence
+      operationId: get_attendence_employers__employer_id__employees__employee_id__attendence_get
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: employee_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employee Id
+        - name: start_date
+          in: query
+          required: false
+          schema:
+            type: string
+            description: Date format is yyyy-mm-dd
+            default: ''
+            title: Start Date
+          description: Date format is yyyy-mm-dd
+        - name: end_date
+          in: query
+          required: false
+          schema:
+            type: string
+            description: Date format is yyyy-mm-dd
+            default: ''
+            title: End Date
+          description: Date format is yyyy-mm-dd
+        - name: lat
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Lat
+        - name: long
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Long
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttendenceGetResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /employers/{employer_id}/employees/attendence:
+    get:
+      tags:
+        - attendenceAPIs
+      summary: Get All Attendence
+      operationId: get_all_attendence_employers__employer_id__employees_attendence_get
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: start_date
+          in: query
+          required: false
+          schema:
+            type: string
+            description: Date format is yyyy-mm-dd
+            default: ''
+            title: Start Date
+          description: Date format is yyyy-mm-dd
+        - name: end_date
+          in: query
+          required: false
+          schema:
+            type: string
+            description: Date format is yyyy-mm-dd
+            default: ''
+            title: End Date
+          description: Date format is yyyy-mm-dd
+        - name: lat
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Lat
+        - name: long
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Long
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttendenceGetAllResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /employers/{employer_id}/employees/{employee_id}/leaves/submit:
+    post:
+      tags:
+        - annualLeavesAPIs
+      summary: Submit Leaves
+      operationId: submit_leaves_employers__employer_id__employees__employee_id__leaves_submit_post
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: employee_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employee Id
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeavesSubmitRequestDTO'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeavesSubmitResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /employers/{employer_id}/employees/{employee_id}/leaves:
+    get:
+      tags:
+        - annualLeavesAPIs
+      summary: Show Leaves
+      operationId: show_leaves_employers__employer_id__employees__employee_id__leaves_get
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: employee_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employee Id
+        - name: start_date
+          in: query
+          required: false
+          schema:
+            type: string
+            description: Date format is yyyy-mm-dd
+            default: ''
+            title: Start Date
+          description: Date format is yyyy-mm-dd
+        - name: end_date
+          in: query
+          required: false
+          schema:
+            type: string
+            description: Date format is yyyy-mm-dd
+            default: ''
+            title: End Date
+          description: Date format is yyyy-mm-dd
+        - name: lat
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Lat
+        - name: long
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Long
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeavesGetResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+        - annualLeavesAPIs
+      summary: Update Leave Status
+      operationId: update_leave_status_employers__employer_id__employees__employee_id__leaves_patch
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: employee_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employee Id
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeaveStatusUpdateDTO'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /employers/{employer_id}/employees/leaves:
+    get:
+      tags:
+        - annualLeavesAPIs
+      summary: Show All Leaves
+      operationId: show_all_leaves_employers__employer_id__employees_leaves_get
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: start_date
+          in: query
+          required: false
+          schema:
+            type: string
+            description: Date format is yyyy-mm-dd
+            default: ''
+            title: Start Date
+          description: Date format is yyyy-mm-dd
+        - name: end_date
+          in: query
+          required: false
+          schema:
+            type: string
+            description: Date format is yyyy-mm-dd
+            default: ''
+            title: End Date
+          description: Date format is yyyy-mm-dd
+        - name: lat
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Lat
+        - name: long
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Long
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeavesWithEmpIDGetResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /employers/{employer_id}/employees/{employee_id}/timesheet/submit:
+    post:
+      tags:
+        - timesheetAPIs
+      summary: Submit Timesheet
+      operationId: submit_timesheet_employers__employer_id__employees__employee_id__timesheet_submit_post
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: employee_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employee Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimesheetSubmitDetails'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimesheetSubmitResponseModel'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /employers/{employer_id}/employees/{employee_id}/timesheet/:
+    get:
+      tags:
+        - timesheetAPIs
+      summary: Show Timesheet
+      operationId: show_timesheet_employers__employer_id__employees__employee_id__timesheet__get
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: employee_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employee Id
+        - name: start_date
+          in: query
+          required: false
+          schema:
+            type: string
+            title: Start Date
+        - name: end_date
+          in: query
+          required: false
+          schema:
+            type: string
+            title: End Date
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimesheetGetResponseModel'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /admin/create:
+    post:
+      tags:
+        - adminAPIs
+      summary: Admin Create
+      operationId: admin_create_admin_create_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminLoginRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminResponseModel'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /admin/login:
+    post:
+      tags:
+        - adminAPIs
+      summary: Admin Login
+      operationId: admin_login_admin_login_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminLoginRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminLoginResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /admin/employers:
+    get:
+      tags:
+        - adminAPIs
+      summary: Get Employers
+      operationId: get_employers_admin_employers_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployersResponseDTO'
+  /employers/create:
+    post:
+      tags:
+        - employerAPIs
+      summary: Create Employer
+      operationId: create_employer_employers_create_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployerRequestDTO'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployerDetailsResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /employers/login:
+    post:
+      tags:
+        - employerAPIs
+      summary: Employer Login
+      operationId: employer_login_employers_login_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployerLoginRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployerLoginResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /employers/{employer_id}/password:
+    patch:
+      tags:
+        - employerAPIs
+      summary: Change Password
+      description: Password change endpoint
+      operationId: change_password_employers__employer_id__password_patch
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordChangeRequestDTO'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordChangeResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /employers:
+    get:
+      tags:
+        - employerAPIs
+      summary: Get Employers
+      operationId: get_employers_employers_get
+      parameters:
+        - name: lat
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Lat
+        - name: long
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Long
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployersResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /employers/{employer_id}:
+    get:
+      tags:
+        - employerAPIs
+      summary: Get Employer
+      operationId: get_employer_employers__employer_id__get
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: lat
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Lat
+        - name: long
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Long
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployerDetailsResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+        - employerAPIs
+      summary: Delete Employer
+      operationId: delete_employer_employers__employer_id__delete
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: lat
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Lat
+        - name: long
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Long
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployerDetailsResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /employers/{employer_id}/employees/create:
+    post:
+      tags:
+        - employeeAPIs
+      summary: Create Employee
+      operationId: create_employee_employers__employer_id__employees_create_post
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeRequestDTO'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeDetailsResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /employees/login:
+    post:
+      tags:
+        - employeeAPIs
+      summary: Employee Login
+      operationId: employee_login_employees_login_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeLoginRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeLoginResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /employers/{employer_id}/employees:
+    get:
+      tags:
+        - employeeAPIs
+      summary: Get Employees
+      operationId: get_employees_employers__employer_id__employees_get
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: lat
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Lat
+        - name: long
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Long
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeesResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /employers/{employer_id}/employees/{employee_id}:
+    get:
+      tags:
+        - employeeAPIs
+      summary: Get Employee
+      operationId: get_employee_employers__employer_id__employees__employee_id__get
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: employee_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employee Id
+        - name: lat
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Lat
+        - name: long
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Long
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeDetailsResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+        - employeeAPIs
+      summary: Delete Employee
+      operationId: delete_employee_employers__employer_id__employees__employee_id__delete
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: employee_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employee Id
+        - name: lat
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Lat
+        - name: long
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+            title: Long
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeDetailsResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+        - employeeAPIs
+      summary: Update Employee
+      operationId: update_employee_employers__employer_id__employees__employee_id__patch
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: employee_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employee Id
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeDetailsUpdateRequestDTO'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeDetailsResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /employers/{employer_id}/employees/{employee_id}/password:
+    patch:
+      tags:
+        - employeeAPIs
+      summary: Change Password
+      description: Password change endpoint
+      operationId: change_password_employers__employer_id__employees__employee_id__password_patch
+      parameters:
+        - name: employer_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employer Id
+        - name: employee_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Employee Id
+        - name: x-token
+          in: header
+          required: true
+          schema:
+            type: string
+            title: X-Token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordChangeRequestDTO'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordChangeResponseDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /device_details:
+    post:
+      tags:
+        - eventAPIs
+      summary: Device Details
+      operationId: device_details_device_details_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/eventDTO'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AdminLoginRequest:
+      properties:
+        adminId:
+          type: string
+          maxLength: 64
+          minLength: 8
+          title: Adminid
+        adminPassword:
+          type: string
+          maxLength: 64
+          minLength: 8
+          title: Adminpassword
+      type: object
+      required:
+        - adminId
+        - adminPassword
+      title: AdminLoginRequest
+    AdminLoginResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/AdminResponse'
+        message:
+          type: string
+          title: Message
+        token:
+          type: string
+          title: Token
+      type: object
+      required:
+        - data
+        - message
+        - token
+      title: AdminLoginResponse
+    AdminResponse:
+      properties:
+        adminId:
+          type: string
+          title: Adminid
+      type: object
+      required:
+        - adminId
+      title: AdminResponse
+    AdminResponseModel:
+      properties:
+        data:
+          $ref: '#/components/schemas/AdminResponse'
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+        - data
+        - message
+      title: AdminResponseModel
+    AttendenceDTO:
+      properties:
+        checkInTime:
+          type: string
+          title: Checkintime
+        checkOutTime:
+          anyOf:
+            - type: string
+
+          title: Checkouttime
+          default: ''
+        checkInLat:
+          anyOf:
+            - type: number
+
+          title: Checkinlat
+          default: 0
+        checkInLong:
+          anyOf:
+            - type: number
+
+          title: Checkinlong
+          default: 0
+        checkOutLat:
+          anyOf:
+            - type: number
+
+          title: Checkoutlat
+          default: 0
+        checkOutLong:
+          anyOf:
+            - type: number
+
+          title: Checkoutlong
+          default: 0
+        updatedTime:
+          anyOf:
+            - type: string
+
+          title: Updatedtime
+          default: ''
+      type: object
+      required:
+        - checkInTime
+      title: AttendenceDTO
+    AttendenceDataWithEmpIdDTO:
+      properties:
+        checkInTime:
+          type: string
+          title: Checkintime
+        checkOutTime:
+          anyOf:
+            - type: string
+
+          title: Checkouttime
+          default: ''
+        checkInLat:
+          anyOf:
+            - type: number
+
+          title: Checkinlat
+          default: 0
+        checkInLong:
+          anyOf:
+            - type: number
+
+          title: Checkinlong
+          default: 0
+        checkOutLat:
+          anyOf:
+            - type: number
+
+          title: Checkoutlat
+          default: 0
+        checkOutLong:
+          anyOf:
+            - type: number
+
+          title: Checkoutlong
+          default: 0
+        updatedTime:
+          anyOf:
+            - type: string
+
+          title: Updatedtime
+          default: ''
+        employeeId:
+          type: string
+          title: Employeeid
+      type: object
+      required:
+        - checkInTime
+        - employeeId
+      title: AttendenceDataWithEmpIdDTO
+    AttendenceGetAllResponseDTO:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AttendenceDataWithEmpIdDTO'
+          type: array
+          title: Data
+        msg:
+          type: string
+          title: Msg
+      type: object
+      required:
+        - data
+        - msg
+      title: AttendenceGetAllResponseDTO
+    AttendenceGetResponseDTO:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AttendenceDTO'
+          type: array
+          title: Data
+        msg:
+          type: string
+          title: Msg
+      type: object
+      required:
+        - data
+        - msg
+      title: AttendenceGetResponseDTO
+    CheckInRequestDTO:
+      properties:
+        lat:
+          anyOf:
+            - type: number
+
+          title: Lat
+          default: 0
+        long:
+          anyOf:
+            - type: number
+
+          title: Long
+          default: 0
+        locationName:
+          anyOf:
+            - type: string
+
+          title: Locationname
+          default: ''
+        checkInTime:
+          type: string
+          title: Checkintime
+        checkInLat:
+          anyOf:
+            - type: number
+
+          title: Checkinlat
+          default: 0
+        checkInLong:
+          anyOf:
+            - type: number
+
+          title: Checkinlong
+          default: 0
+      type: object
+      required:
+        - checkInTime
+      title: CheckInRequestDTO
+    CheckInResponseDTO:
+      properties:
+        msg:
+          type: string
+          title: Msg
+      type: object
+      required:
+        - msg
+      title: CheckInResponseDTO
+    CheckOuResponseDTO:
+      properties:
+        msg:
+          type: string
+          title: Msg
+      type: object
+      required:
+        - msg
+      title: CheckOuResponseDTO
+    CheckOutRequestDTO:
+      properties:
+        lat:
+          anyOf:
+            - type: number
+
+          title: Lat
+          default: 0
+        long:
+          anyOf:
+            - type: number
+
+          title: Long
+          default: 0
+        locationName:
+          anyOf:
+            - type: string
+
+          title: Locationname
+          default: ''
+        checkOutTime:
+          type: string
+          title: Checkouttime
+        checkOutLat:
+          anyOf:
+            - type: number
+
+          title: Checkoutlat
+          default: 0
+        checkOutLong:
+          anyOf:
+            - type: number
+
+          title: Checkoutlong
+          default: 0
+      type: object
+      required:
+        - checkOutTime
+      title: CheckOutRequestDTO
+    EmployeeDetailsDTO:
+      properties:
+        employeeName:
+          type: string
+          title: Employeename
+        employeeEmail:
+          type: string
+          format: email
+          title: Employeeemail
+        employerId:
+          type: string
+          title: Employerid
+        employeeId:
+          type: string
+          title: Employeeid
+        employeeRole:
+          anyOf:
+            - $ref: '#/components/schemas/Role'
+
+          default: normal
+        employeeMobile:
+          type: string
+          title: Employeemobile
+        gender:
+          anyOf:
+            - $ref: '#/components/schemas/Gender'
+
+          default: male
+        dob:
+          anyOf:
+            - type: string
+              maxLength: 10
+              minLength: 10
+
+          title: Dob
+          description: Date format is yyyy-mm-dd
+          default: '2023-10-27'
+        address:
+          anyOf:
+            - type: string
+
+          title: Address
+          default: ''
+        city:
+          anyOf:
+            - type: string
+
+          title: City
+          default: ''
+        state:
+          anyOf:
+            - type: string
+
+          title: State
+          default: ''
+        postalCode:
+          anyOf:
+            - type: integer
+
+          title: Postalcode
+          default: 100001
+        isDefaultPassword:
+          anyOf:
+            - type: boolean
+
+          title: Isdefaultpassword
+      type: object
+      required:
+        - employeeName
+        - employeeEmail
+        - employerId
+        - employeeId
+        - employeeMobile
+        - isDefaultPassword
+      title: EmployeeDetailsDTO
+    EmployeeDetailsResponseDTO:
+      properties:
+        data:
+          $ref: '#/components/schemas/EmployeeDetailsDTO'
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+        - data
+        - message
+      title: EmployeeDetailsResponseDTO
+    EmployeeDetailsUpdateRequestDTO:
+      properties:
+        lat:
+          anyOf:
+            - type: number
+
+          title: Lat
+          default: 0
+        long:
+          anyOf:
+            - type: number
+
+          title: Long
+          default: 0
+        locationName:
+          anyOf:
+            - type: string
+
+          title: Locationname
+          default: ''
+        contactNum:
+          anyOf:
+            - type: string
+
+          title: Contactnum
+          default: ''
+        gender:
+          anyOf:
+            - $ref: '#/components/schemas/Gender'
+
+          default: ''
+        dob:
+          type: string
+          maxLength: 10
+          minLength: 10
+          title: Dob
+          description: Date format is yyyy-mm-dd
+          default: ''
+        address:
+          anyOf:
+            - type: string
+
+          title: Address
+          default: ''
+        city:
+          anyOf:
+            - type: string
+
+          title: City
+          default: ''
+        state:
+          anyOf:
+            - type: string
+
+          title: State
+          default: ''
+        postalCode:
+          anyOf:
+            - type: integer
+
+          title: Postalcode
+          default: ''
+      type: object
+      title: EmployeeDetailsUpdateRequestDTO
+    EmployeeLoginRequestDTO:
+      properties:
+        lat:
+          anyOf:
+            - type: number
+
+          title: Lat
+          default: 0
+        long:
+          anyOf:
+            - type: number
+
+          title: Long
+          default: 0
+        locationName:
+          anyOf:
+            - type: string
+
+          title: Locationname
+          default: ''
+        employeeEmail:
+          type: string
+          format: email
+          title: Employeeemail
+        employeePassword:
+          type: string
+          maxLength: 64
+          minLength: 8
+          title: Employeepassword
+      type: object
+      required:
+        - employeeEmail
+        - employeePassword
+      title: EmployeeLoginRequestDTO
+    EmployeeLoginResponseDTO:
+      properties:
+        data:
+          $ref: '#/components/schemas/EmployeeDetailsDTO'
+        message:
+          type: string
+          title: Message
+        token:
+          type: string
+          title: Token
+      type: object
+      required:
+        - data
+        - message
+        - token
+      title: EmployeeLoginResponseDTO
+    EmployeeRequestDTO:
+      properties:
+        lat:
+          anyOf:
+            - type: number
+
+          title: Lat
+          default: 0
+        long:
+          anyOf:
+            - type: number
+
+          title: Long
+          default: 0
+        locationName:
+          anyOf:
+            - type: string
+
+          title: Locationname
+          default: ''
+        employeeName:
+          type: string
+          maxLength: 128
+          minLength: 3
+          title: Employeename
+        employeeEmail:
+          type: string
+          format: email
+          title: Employeeemail
+        employeePassword:
+          type: string
+          maxLength: 64
+          minLength: 8
+          title: Employeepassword
+        employeeRole:
+          anyOf:
+            - $ref: '#/components/schemas/Role'
+
+          default: normal
+        employeeMobile:
+          type: string
+          title: Employeemobile
+      type: object
+      required:
+        - employeeName
+        - employeeEmail
+        - employeePassword
+        - employeeMobile
+      title: EmployeeRequestDTO
+    EmployeesResponseDTO:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/EmployeeDetailsDTO'
+          type: array
+          title: Data
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+        - data
+        - message
+      title: EmployeesResponseDTO
+    EmployerDetailsDTO:
+      properties:
+        employerName:
+          type: string
+          title: Employername
+        employerEmail:
+          type: string
+          format: email
+          title: Employeremail
+        employerId:
+          type: string
+          title: Employerid
+        employerMobile:
+          type: string
+          title: Employermobile
+        ownerName:
+          type: string
+          title: Ownername
+        employerStatus:
+          $ref: '#/components/schemas/EmployerStatus'
+      type: object
+      required:
+        - employerName
+        - employerEmail
+        - employerId
+        - employerMobile
+        - ownerName
+        - employerStatus
+      title: EmployerDetailsDTO
+    EmployerDetailsResponseDTO:
+      properties:
+        data:
+          $ref: '#/components/schemas/EmployerDetailsDTO'
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+        - data
+        - message
+      title: EmployerDetailsResponseDTO
+    EmployerLoginRequestDTO:
+      properties:
+        lat:
+          anyOf:
+            - type: number
+
+          title: Lat
+          default: 0
+        long:
+          anyOf:
+            - type: number
+
+          title: Long
+          default: 0
+        locationName:
+          anyOf:
+            - type: string
+
+          title: Locationname
+          default: ''
+        employerEmail:
+          type: string
+          format: email
+          title: Employeremail
+        employerPassword:
+          type: string
+          maxLength: 64
+          minLength: 8
+          title: Employerpassword
+      type: object
+      required:
+        - employerEmail
+        - employerPassword
+      title: EmployerLoginRequestDTO
+    EmployerLoginResponseDTO:
+      properties:
+        data:
+          $ref: '#/components/schemas/EmployerDetailsDTO'
+        message:
+          type: string
+          title: Message
+        token:
+          type: string
+          title: Token
+      type: object
+      required:
+        - data
+        - message
+        - token
+      title: EmployerLoginResponseDTO
+    EmployerRequestDTO:
+      properties:
+        lat:
+          anyOf:
+            - type: number
+
+          title: Lat
+          default: 0
+        long:
+          anyOf:
+            - type: number
+
+          title: Long
+          default: 0
+        locationName:
+          anyOf:
+            - type: string
+
+          title: Locationname
+          default: ''
+        employerName:
+          type: string
+          maxLength: 64
+          minLength: 4
+          title: Employername
+        employerEmail:
+          type: string
+          format: email
+          title: Employeremail
+        employerMobile:
+          type: string
+          maxLength: 32
+          minLength: 8
+          title: Employermobile
+        employerPassword:
+          type: string
+          maxLength: 64
+          minLength: 8
+          title: Employerpassword
+        ownerName:
+          anyOf:
+            - type: string
+
+          title: Ownername
+          default: ''
+        employerStatus:
+          anyOf:
+            - $ref: '#/components/schemas/EmployerStatus'
+
+          default: pending
+      type: object
+      required:
+        - employerName
+        - employerEmail
+        - employerMobile
+        - employerPassword
+      title: EmployerRequestDTO
+    EmployerStatus:
+      type: string
+      enum:
+        - pending
+        - approved
+      title: EmployerStatus
+    EmployersResponseDTO:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/EmployerDetailsDTO'
+          type: array
+          title: Data
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+        - data
+        - message
+      title: EmployersResponseDTO
+    Gender:
+      type: string
+      enum:
+        - male
+        - female
+        - others
+      title: Gender
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    LeavDayWithLeavIdDTO:
+      properties:
+        startDate:
+          type: string
+          maxLength: 10
+          minLength: 10
+          title: Startdate
+          description: Date format is yyyy-mm-dd
+          default: '1970-01-01'
+        endDate:
+          type: string
+          maxLength: 10
+          minLength: 10
+          title: Enddate
+          description: Date format is yyyy-mm-dd
+          default: '1970-01-01'
+        submissionDate:
+          anyOf:
+            - type: string
+              maxLength: 21
+              minLength: 10
+
+          title: Submissiondate
+          description: Date format is yyyy-mm-dd hh:mm:ss
+          default: '1970-01-01 11:11:11'
+        leaveType:
+          $ref: '#/components/schemas/LeaveType'
+        leaveDescription:
+          type: string
+          title: Leavedescription
+          description: Work description for the hrs you are submitting
+        status:
+          $ref: '#/components/schemas/LeaveStatusEnum'
+        noOfDays:
+          type: integer
+          title: Noofdays
+        leaveId:
+          type: integer
+          title: Leaveid
+      type: object
+      required:
+        - leaveType
+        - leaveDescription
+        - status
+        - noOfDays
+        - leaveId
+      title: LeavDayWithLeavIdDTO
+    LeaveDayDTO:
+      properties:
+        startDate:
+          type: string
+          maxLength: 10
+          minLength: 10
+          title: Startdate
+          description: Date format is yyyy-mm-dd
+          default: '1970-01-01'
+        endDate:
+          type: string
+          maxLength: 10
+          minLength: 10
+          title: Enddate
+          description: Date format is yyyy-mm-dd
+          default: '1970-01-01'
+        submissionDate:
+          anyOf:
+            - type: string
+              maxLength: 21
+              minLength: 10
+
+          title: Submissiondate
+          description: Date format is yyyy-mm-dd hh:mm:ss
+          default: '1970-01-01 11:11:11'
+        leaveType:
+          $ref: '#/components/schemas/LeaveType'
+        leaveDescription:
+          type: string
+          title: Leavedescription
+          description: Work description for the hrs you are submitting
+        status:
+          $ref: '#/components/schemas/LeaveStatusEnum'
+        noOfDays:
+          type: integer
+          title: Noofdays
+      type: object
+      required:
+        - leaveType
+        - leaveDescription
+        - status
+        - noOfDays
+      title: LeaveDayDTO
+    LeaveDayWithEmpIdDTO:
+      properties:
+        startDate:
+          type: string
+          maxLength: 10
+          minLength: 10
+          title: Startdate
+          description: Date format is yyyy-mm-dd
+          default: '1970-01-01'
+        endDate:
+          type: string
+          maxLength: 10
+          minLength: 10
+          title: Enddate
+          description: Date format is yyyy-mm-dd
+          default: '1970-01-01'
+        submissionDate:
+          anyOf:
+            - type: string
+              maxLength: 21
+              minLength: 10
+
+          title: Submissiondate
+          description: Date format is yyyy-mm-dd hh:mm:ss
+          default: '1970-01-01 11:11:11'
+        leaveType:
+          $ref: '#/components/schemas/LeaveType'
+        leaveDescription:
+          type: string
+          title: Leavedescription
+          description: Work description for the hrs you are submitting
+        status:
+          $ref: '#/components/schemas/LeaveStatusEnum'
+        noOfDays:
+          type: integer
+          title: Noofdays
+        leaveId:
+          type: integer
+          title: Leaveid
+        employeeId:
+          type: string
+          title: Employeeid
+      type: object
+      required:
+        - leaveType
+        - leaveDescription
+        - status
+        - noOfDays
+        - leaveId
+        - employeeId
+      title: LeaveDayWithEmpIdDTO
+    LeaveStatusEnum:
+      type: string
+      enum:
+        - submitted
+        - approved
+        - rejected
+        - cancelled
+      title: LeaveStatusEnum
+    LeaveStatusUpdateDTO:
+      properties:
+        lat:
+          anyOf:
+            - type: number
+
+          title: Lat
+          default: 0
+        long:
+          anyOf:
+            - type: number
+
+          title: Long
+          default: 0
+        locationName:
+          anyOf:
+            - type: string
+
+          title: Locationname
+          default: ''
+        leaveId:
+          type: integer
+          title: Leaveid
+        status:
+          type: string
+          title: Status
+      type: object
+      required:
+        - leaveId
+        - status
+      title: LeaveStatusUpdateDTO
+    LeaveType:
+      type: string
+      enum:
+        - annual
+        - medical
+        - vacation
+        - holiday
+      title: LeaveType
+    LeavesGetResponseDTO:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/LeavDayWithLeavIdDTO'
+          type: array
+          title: Data
+        msg:
+          type: string
+          title: Msg
+      type: object
+      required:
+        - data
+        - msg
+      title: LeavesGetResponseDTO
+    LeavesSubmitRequestDTO:
+      properties:
+        lat:
+          anyOf:
+            - type: number
+
+          title: Lat
+          default: 0
+        long:
+          anyOf:
+            - type: number
+
+          title: Long
+          default: 0
+        locationName:
+          anyOf:
+            - type: string
+
+          title: Locationname
+          default: ''
+        startDate:
+          type: string
+          maxLength: 10
+          minLength: 10
+          title: Startdate
+          description: Date format is yyyy-mm-dd
+          default: '1970-01-01'
+        endDate:
+          type: string
+          maxLength: 10
+          minLength: 10
+          title: Enddate
+          description: Date format is yyyy-mm-dd
+          default: '1970-01-01'
+        submissionDate:
+          anyOf:
+            - type: string
+              maxLength: 21
+              minLength: 10
+
+          title: Submissiondate
+          description: Date format is yyyy-mm-dd hh:mm:ss
+          default: '1970-01-01 11:11:11'
+        leaveType:
+          $ref: '#/components/schemas/LeaveType'
+        leaveDescription:
+          type: string
+          title: Leavedescription
+          description: Work description for the hrs you are submitting
+        status:
+          $ref: '#/components/schemas/LeaveStatusEnum'
+        noOfDays:
+          type: integer
+          title: Noofdays
+      type: object
+      required:
+        - leaveType
+        - leaveDescription
+        - status
+        - noOfDays
+      title: LeavesSubmitRequestDTO
+    LeavesSubmitResponseDTO:
+      properties:
+        data:
+          $ref: '#/components/schemas/LeaveDayDTO'
+        msg:
+          type: string
+          title: Msg
+      type: object
+      required:
+        - data
+        - msg
+      title: LeavesSubmitResponseDTO
+    LeavesWithEmpIDGetResponseDTO:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/LeaveDayWithEmpIdDTO'
+          type: array
+          title: Data
+        msg:
+          type: string
+          title: Msg
+      type: object
+      required:
+        - data
+        - msg
+      title: LeavesWithEmpIDGetResponseDTO
+    PasswordChangeRequestDTO:
+      properties:
+        lat:
+          anyOf:
+            - type: number
+
+          title: Lat
+          default: 0
+        long:
+          anyOf:
+            - type: number
+
+          title: Long
+          default: 0
+        locationName:
+          anyOf:
+            - type: string
+
+          title: Locationname
+          default: ''
+        oldPassword:
+          type: string
+          title: Oldpassword
+        newPassword:
+          type: string
+          title: Newpassword
+        isDefaultPasswordUpdate:
+          anyOf:
+            - type: boolean
+
+          title: Isdefaultpasswordupdate
+          default: false
+      type: object
+      required:
+        - oldPassword
+        - newPassword
+      title: PasswordChangeRequestDTO
+    PasswordChangeResponseDTO:
+      properties:
+        msg:
+          type: string
+          title: Msg
+      type: object
+      required:
+        - msg
+      title: PasswordChangeResponseDTO
+    Role:
+      type: string
+      enum:
+        - admin
+        - manager
+        - normal
+      title: Role
+    SuccessResponse:
+      properties:
+        msg:
+          type: string
+          title: Msg
+      type: object
+      required:
+        - msg
+      title: SuccessResponse
+    SuccessResponseDTO:
+      properties:
+        msg:
+          type: string
+          title: Msg
+      type: object
+      required:
+        - msg
+      title: SuccessResponseDTO
+    TimesheetGetResponseModel:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/WorkingDayDetails'
+          type: array
+          title: Data
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+        - data
+        - message
+      title: TimesheetGetResponseModel
+    TimesheetSubmitDetails:
+      properties:
+        submissionDate:
+          type: string
+          maxLength: 10
+          minLength: 10
+          title: Submissiondate
+          description: date format should be dd/mm/yyyy
+          default: 27/10/2023
+        workedDays:
+          items:
+            $ref: '#/components/schemas/WorkingDay'
+          type: array
+          title: Workeddays
+      type: object
+      required:
+        - workedDays
+      title: TimesheetSubmitDetails
+    TimesheetSubmitResponseModel:
+      properties:
+        data:
+          $ref: '#/components/schemas/TimesheetSubmitDetails'
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+        - data
+        - message
+      title: TimesheetSubmitResponseModel
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+        - loc
+        - msg
+        - type
+      title: ValidationError
+    WorkingDay:
+      properties:
+        workingDay:
+          type: string
+          maxLength: 10
+          minLength: 10
+          title: Workingday
+          description: date format should be dd/mm/yyyy
+          default: 27/10/2023
+        workingHrs:
+          type: integer
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+          title: Workinghrs
+        workDescription:
+          type: string
+          title: Workdescription
+          description: Work description for the hrs you are submitting
+        status:
+          type: string
+          enum:
+            - submitted
+            - approved
+            - rejected
+            - Submitted
+          title: Status
+      type: object
+      required:
+        - workingHrs
+        - workDescription
+        - status
+      title: WorkingDay
+    WorkingDayDetails:
+      properties:
+        employerId:
+          type: string
+          title: Employerid
+        employeeId:
+          type: string
+          title: Employeeid
+        workingDay:
+          type: string
+          title: Workingday
+        workingHrs:
+          type: integer
+          title: Workinghrs
+        workDescription:
+          type: string
+          title: Workdescription
+        status:
+          type: string
+          enum:
+            - submitted
+            - approved
+            - rejected
+          title: Status
+        submissionDateTime:
+          type: string
+          title: Submissiondatetime
+      type: object
+      required:
+        - employerId
+        - employeeId
+        - workingDay
+        - workingHrs
+        - workDescription
+        - status
+        - submissionDateTime
+      title: WorkingDayDetails
+    eventDTO:
+      properties:
+        employerName:
+          anyOf:
+            - type: string
+
+          title: Employername
+          default: Employer name
+        employeeName:
+          anyOf:
+            - type: string
+
+          title: Employeename
+          default: Employee name
+        employerId:
+          anyOf:
+            - type: string
+
+          title: Employerid
+          default: Employer id
+        employeeId:
+          anyOf:
+            - type: string
+
+          title: Employeeid
+          default: Employee name
+        deviceOs:
+          anyOf:
+            - type: string
+
+          title: Deviceos
+          default: The operating system running on the device (e.g., iOS 14, Android 11).
+        deviceOsVer:
+          anyOf:
+            - type: string
+
+          title: Deviceosver
+          default: The version number of the operating system
+        appVer:
+          anyOf:
+            - type: string
+
+          title: Appver
+          default: The version of the app installed on the device.
+        deviceModel:
+          anyOf:
+            - type: string
+
+          title: Devicemodel
+          default: The model of the device (e.g., iPhone 12, Samsung Galaxy S21).
+        manufacturer:
+          anyOf:
+            - type: string
+
+          title: Manufacturer
+          default: The manufacturer of the device (e.g., Apple, Samsung).
+        screenResolution:
+          anyOf:
+            - type: string
+
+          title: Screenresolution
+          default: The screen resolution of the device (e.g., 1080x1920).
+        screenSize:
+          anyOf:
+            - type: string
+
+          title: Screensize
+          default: The physical size of the screen (e.g., 6.1 inches).
+        batteryLevel:
+          anyOf:
+            - type: string
+
+          title: Batterylevel
+          default: The current battery level as a percentage.
+        batteryHealth:
+          anyOf:
+            - type: string
+
+          title: Batteryhealth
+          default: The overall health of the battery (e.g., Good, Poor)
+        ram:
+          anyOf:
+            - type: string
+
+          title: Ram
+          default: The amount of RAM in the device.
+        availableStorage:
+          anyOf:
+            - type: string
+
+          title: Availablestorage
+          default: The total and available storage space on the device.
+        timezone:
+          anyOf:
+            - type: string
+
+          title: Timezone
+          default: The timezone setting of the device.
+        carrierName:
+          anyOf:
+            - type: string
+
+          title: Carriername
+          default: The timezone setting of the device.
+        networkType:
+          anyOf:
+            - type: string
+
+          title: Networktype
+          default: The type of network connection (e.g., Wi-Fi, 4G, 5G).
+        ipAddress:
+          anyOf:
+            - type: string
+
+          title: Ipaddress
+          default: The current IP address of the device.
+        macAddress:
+          anyOf:
+            - type: string
+
+          title: Macaddress
+          default: The MAC address of the device's network interfaces.
+        signalStrength:
+          anyOf:
+            - type: string
+
+          title: Signalstrength
+          default: The strength of the network signal.
+        lat:
+          anyOf:
+            - type: number
+
+          title: Lat
+          default: 0
+        long:
+          anyOf:
+            - type: number
+
+          title: Long
+          default: 0
+        locationName:
+          anyOf:
+            - type: string
+
+          title: Locationname
+          default: ''
+      type: object
+      title: eventDTO

@@ -19,15 +19,7 @@ const Page1 = () => {
   return (
     <SafeAreaView
       style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{fontSize: 18, top: 50}}>Submit Your Attends</Text>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          margin: 100,
-          alignSelf: 'stretch',
-        }}>
-        <Modal
+                <Modal
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
@@ -63,6 +55,15 @@ const Page1 = () => {
             </View>
           </View>
         </Modal>
+      <Text style={{fontSize: 18, top: 50}}>Submit Your Attends</Text>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          margin: 100,
+          alignSelf: 'stretch',
+        }}>
+
         <Pressable
           style={[styles.button, styles.buttonOpen]}
           onPress={() => setModalVisible(true)}>
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
   },
   button: {
     //   borderRadius: 20,
-    padding: 10,
+    padding: 7,
     elevation: 2,
   },
   buttonOpen: {

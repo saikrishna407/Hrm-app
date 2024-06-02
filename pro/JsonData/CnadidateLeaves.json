@@ -1,0 +1,90 @@
+[
+    {
+        "candidate_id": "C001",
+        "candidate_name": "John1",
+        "last_name": "Doe",
+        "email": "john.doe@gmail.com",
+        "phone_number": "+1234567890",
+        "type": "Sick Leave",
+        "days":"12",
+        "dates":"Fri 07 to Wed 12",
+        "Approval_type":["Approved","Reject","Pending"],
+        "address": {
+            "street": "123 Main St",
+            "city": "Anytown",
+            "state": "Anystate",
+            "zip_code": "12345",
+            "country": "USA"
+        },
+        "education": [
+            {
+                "degree": "B.Sc. Computer Science",
+                "institution": "University of Example",
+                "graduation_year": 2015
+            },
+            {
+                "degree": "M.Sc. Computer Science",
+                "institution": "University of Example",
+                "graduation_year": 2017
+            }
+        ],
+        "work_experience": [
+            {
+                "job_title": "Software Engineer",
+                "company": "Tech Solutions Inc.",
+                "start_date": "2017-09-01",
+                "end_date": "2020-06-30",
+                "responsibilities": [
+                    "Developed and maintained web applications",
+                    "Collaborated with cross-functional teams",
+                    "Implemented software solutions"
+                ]
+            },
+            {
+                "job_title": "Senior Software Engineer",
+                "company": "Innovative Tech Co.",
+                "start_date": "2020-07-01",
+                "end_date": "Present",
+                "responsibilities": [
+                    "Lead a team of developers",
+                    "Designed scalable software architectures",
+                    "Conducted code reviews and mentoring"
+                ]
+            }
+        ],
+        "skills": [
+            "JavaScript",
+            "Python",
+            "Java",
+            "SQL",
+            "React",
+            "Node.js"
+        ],
+        "certifications": [
+            {
+                "certification_name": "Certified Kubernetes Administrator (CKA)",
+                "issuing_organization": "The Linux Foundation",
+                "issue_date": "2021-05-01"
+            }
+        ],
+        "languages": [
+            {
+                "language": "English",
+                "proficiency": "Native"
+            },
+            {
+                "language": "Spanish",
+                "proficiency": "Intermediate"
+            }
+        ],
+        "references": [
+            {
+                "name": "Jane Smith",
+                "relationship": "Former Manager",
+                "contact_info": "jane.smith@gmail.com"
+            }
+        ]
+    }
+]
+
+

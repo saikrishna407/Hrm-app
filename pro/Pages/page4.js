@@ -1,82 +1,276 @@
-// Page4.js
-import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
-// import * as ImagePicker from 'react-native-image-picker';
-import DatePicker1 from '../Componets/DatePicker/datePicker';
+import React, {useState} from 'react';
+import {
+  SafeAreaView,
+  View,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  Pressable,
+  Modal,
+  TextInput,
+} from 'react-native';
+import CandidateData from '../../CandidateJson.json';
 
-const Page4 = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [bio, setBio] = useState('');
-//   const [avatar, setAvatar] = useState(null);
+const EditIcon = require('../../assets/editicon.webp');
+const DeleteIcon = require('../../assets/delete.png');
+const User1 = require('../../assets/user1.png');
+const Page4 = ({navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible1, setModalVisible1] = useState(false);
+  const renderItem = ({item}) => (
+    <View style={styles.item}>
+      <View
+        style={{
+          // flex: 1,
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+        }}>
+        <View style={{justifyContent: 'flex-start', margin: 20, marginTop: 5}}>
+          <Text style={styles.title1}>Employee: Sai krishna</Text>
+          <Text style={styles.title}>Date: 26 Sunday 2024</Text>
+          <View style={{top: 20, flexDirection: 'row'}}>
+            <Text style={styles.title}> Check in : 06:50 AM | </Text>
+            <Text style={styles.title}> Check Out: 04:00 PM</Text>
+          </View>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <TouchableOpacity>
+            <Text style={styles.title2}>8 hr</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
 
-//   const handleChoosePhoto = () => {
-//     ImagePicker.launchImageLibrary({ mediaType: 'photo', quality: 1 }, (response) => {
-//       if (response.didCancel) {
-//         console.log('User cancelled image picker');
-//       } else if (response.errorCode) {
-//         console.log('ImagePicker Error: ', response.errorMessage);
-//       } else {
-//         setAvatar(response.assets[0].uri);
-//       }
-//     });
-//   };
-
-  const handleSaveProfile = () => {
-    // Add your save logic here
-    alert('Profile saved');
+  const handleItemPress = id => {
+    alert(`Item with ID ${id} clicked`);
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <TouchableOpacity >
-        {/* {avatar ? (
-          <Image source={{ uri: avatar }} style={styles.avatar} />
-        ) : (
-          <View style={[styles.avatar, styles.avatarPlaceholder]}>
-            <Text style={styles.avatarText}>Choose Photo</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.item}>
+        <Modal
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+            setModalVisible(!modalVisible);
+          }}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <View>
+                <Text style={styles.modalText}>Apply Leave</Text>
+              </View>
+              <View
+                style={{
+                  width: 350,
+                  borderWidth: 1,
+                  borderColor: '#b3afaf',
+                  margin: 5,
+                  marginTop: 10,
+                }}></View>
+              <View style={styles.modelTextView1}>
+                <View style={styles.modelTextView}>
+                  <Text style={styles.modelText}>Leave Type :</Text>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="----select----"
+                    // value={name}
+                    // onChangeText={setName}
+                  />
+                </View>
+                <View style={styles.modelTextView}>
+                  <Text style={styles.modelText}>Leave Balance :</Text>
+                  <Text style={{right: 0}}>8 Days</Text>
+                </View>
+                <View style={styles.modelTextView}>
+                  <Text style={styles.modelText}>From Date :</Text>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="----select----"
+                    // value={name}
+                    // onChangeText={setName}
+                  />
+                </View>
+                <View style={styles.modelTextView}>
+                  <Text style={styles.modelText}>To Date:</Text>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="----select----"
+                    // value={name}
+                    // onChangeText={setName}
+                  />
+                </View>
+                <View style={styles.modelTextView}>
+                  <Text style={styles.modelText}>Leaves Applying:</Text>
+                  <Text style={{right: 110}}>8 Days</Text>
+                </View>
+                <View style={styles.modelTextView}>
+                  <Text style={styles.modelText}>Comments :</Text>
+                  <TextInput
+                    editable
+                    multiline
+                    numberOfLines={4}
+                    maxLength={100}
+                    // onChangeText={text => onChangeText(text)}
+                    // value={value}
+                    style={styles.inputArea}
+                    // placeholder="Please enter the Reason"
+                  />
+                </View>
+              </View>
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginTop: 20,
+                  alignContent: 'space-between',
+                }}>
+                <Pressable
+                  style={[styles.button1, styles.buttonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}>
+                  <Text style={styles.textStyle1}>Save</Text>
+                </Pressable>
+                <Pressable
+                  style={[styles.button1, styles.buttonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}>
+                  <Text style={styles.textStyle1}>Cancel</Text>
+                </Pressable>
+              </View>
+            </View>
           </View>
-        )} */}
-        <View style={[styles.avatar, styles.avatarPlaceholder]}>
-            <Text style={styles.avatarText}>Choose Photo</Text>
+        </Modal>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            margin: 10,
+            alignSelf: 'center',
+          }}>
+          <View
+            style={[styles.button, styles.buttonOpen]}
+            onPress={() => setModalVisible(true)}>
+            <Text style={styles.textStyle}>Start Date</Text>
           </View>
-      </TouchableOpacity>
-      <TextInput
-        style={styles.input}
-        placeholder="Name"
-        value={name}
-        onChangeText={setName}
+          <View
+            style={[styles.button, styles.buttonOpen]}
+            onPress={() => setModalVisible1(true)}>
+            <Text style={styles.textStyle}>End Date</Text>
+          </View>
+          <TouchableOpacity
+            style={[styles.button, styles.buttonOpen]}
+            onPress={() => setModalVisible1(true)}>
+            <Text style={styles.textStyle}>Show</Text>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            // margin: 10,
+            alignSelf: 'center',
+          }}></View>
+      </View>
+      <View
+        style={{
+          borderWidth: 1,
+          borderColor: '#b3afaf',
+          margin: 5,
+          marginTop: 10,
+        }}></View>
+      <FlatList
+        data={CandidateData}
+        renderItem={renderItem}
+        style={{margin: 5}}
+        keyExtractor={item => item.candidate_id}
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Bio"
-        value={bio}
-        onChangeText={setBio}
-        multiline
-      />
-      <DatePicker1 />
-      <Button title="Save Profile" onPress={handleSaveProfile} />
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    alignItems: 'center',
+    flex: 1,
+    backgroundColor: '#f0f0f0',
+  },
+  item: {
+    backgroundColor: 'white',
+    padding: 10,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    borderRadius: 5,
+  },
+  title2: {
+    fontSize: 16,
+    // fontWeight: '600',
+    color: '#4287f5',
+    left: -10,
+  },
+  title1: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  title: {
+    fontSize: 14,
+  },
+  button: {
+    //   borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    // marginRight: 10,
+  },
+  button1: {
+    //   borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    marginRight: 10,
+  },
+  buttonOpen: {
+    backgroundColor: 'white',
+    marginLeft: 15,
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: '#4287f5',
+    // fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 16,
+  },
+  textStyle1: {
+    color: 'white',
+    // fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 16,
+  },
+  centeredView: {
+    flex: 1,
     justifyContent: 'center',
-    padding: 16,
+    // alignItems: 'center',
+    marginTop: 100,
+  },
+  modalView: {
+    // flex:1,
+    // height:100,
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   input: {
-    width: '100%',
+    width: '55%',
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
@@ -84,19 +278,35 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     paddingHorizontal: 10,
   },
-  avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    marginBottom: 20,
+  inputArea: {
+    width: '55%',
+    // height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    // marginBottom: 12,
+    // paddingHorizontal: 10,
+    padding: 10,
   },
-  avatarPlaceholder: {
-    backgroundColor: '#e1e1e1',
-    justifyContent: 'center',
+  modelText: {
     alignItems: 'center',
+    alignSelf: 'center',
+    alignContent: 'center',
+    marginRight: 10,
   },
-  avatarText: {
-    color: '#fff',
+  modelTextView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 5,
+    alignContent: 'flex-end',
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    justifyContent: 'space-between',
+  },
+  modelTextView1: {
+    justifyContent: 'space-between',
+    margin: 5,
+    alignSelf: 'stretch',
   },
 });
 

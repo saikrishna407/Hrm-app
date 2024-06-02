@@ -1,6 +1,6 @@
 // DeviceInfoComponent.js
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, Linking, TouchableOpacity,PermissionsAndroid} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Linking, TouchableOpacity} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import Geolocation from '@react-native-community/geolocation';
 
@@ -38,9 +38,9 @@ const Page5 = () => {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         {
-          title: 'Geo location App Location Permission',
+          title: 'Cool Photo App Location Permission',
           message:
-            'Geo location App needs access to your Location ' +
+            'Cool Photo App needs access to your Location ' +
             'so you can take awesome pictures.',
           buttonNeutral: 'Ask Me Later',
           buttonNegative: 'Cancel',
@@ -99,7 +99,7 @@ const Page5 = () => {
         </View>
         {currentLocation?(
           <>
-          <TouchableOpacity onPress={openMaps} style={{backgroundColor:'red',height:50,width:"50%"}}> 
+          <TouchableOpacity onPress={openMaps} style={{backgroundColor:'red',height:10,width:50}}>
           <View>
             <Text>
               Open Maps

@@ -1,3 +1,5 @@
+
+import React, {useState,useEffect} from 'react';
 import {
   Text,
   View,
@@ -13,19 +15,79 @@ import {
   StatusBar,
   Pressable,
 } from 'react-native';
-import React, {useState} from 'react';
-import Cards from '../Componets/cards/cards'
-// import { SafeAreaView } from 'react-native-safe-area-context'
-// import Icons from 'react-native-vector-icons/FontAwesome';
-// import Icon1 from 'react-native-vector-icons/Feather';
-
+import CandidateData from '../../CandidateJson.json';
 const EditIcon = require('../../assets/editicon.webp');
 const DeleteIcon = require('../../assets/delete.png');
 const User1 = require('../../assets/user1.png');
 
-const ModalView = () => {
+
+const handleItemPress = id => {
+  alert(`Item with ID ${id} clicked`);
+};
+const Page2 = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [query, setQuery] = useState('');
+  const [filteredData, setFilteredData] = useState(CandidateData);
+
+  useEffect(() => {
+    // Filter data based on the query
+    if (query) {
+      const filtered = CandidateData.filter(item =>
+        item.first_name.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredData(filtered);
+    } else {
+      // If the query is empty, show the original data
+      setFilteredData(CandidateData);
+    }
+  }, [query]);
+
+  const renderItem = ({item}) => (
+    // const [modalVisible, setModalVisible] = useState(false);
+    <View style={styles.item}>
+      <View
+        style={{
+          // flex: 1,
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+        }}>
+        <View
+          style={{
+            width: 80,
+            height: 80,
+            borderRadius: 70,
+            backgroundColor: '#f2f0f0',
+            alignSelf: 'center',
+          }}></View>
+        <View style={{flex: 1, justifyContent: 'flex-start', margin: 5}}>
+          <Text style={styles.title1}>{item.first_name}</Text>
+          <Text style={styles.title}>{item.last_name}</Text>
+          <Text style={styles.title}>{item.phone_number}</Text>
+          <Text style={styles.title}>{item.email}</Text>
+        </View>
+        <View style={{flexDirection: 'row', alignSelf: 'center'}}>
+          <TouchableOpacity>
+            <Image style={{right: 20, height: 20, width: 20}} source={EditIcon} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <Image style={{height: 20, width: 20}} source={DeleteIcon} />
+          </TouchableOpacity>
+          {/* <TouchableOpacity
+            style={styles.item}
+            onPress={() => handleItemPress(item.first_name)}>
+            {console.log("saiiiii",item)}
+            <Text style={styles.title}>{item.first_name}</Text>
+            <Text style={styles.title}>{item.first_name}</Text>
+            <Text style={styles.title}>{item.first_name}</Text>
+            <Text style={styles.title}>{item.first_name}</Text>
+          </TouchableOpacity> */}
+        </View>
+      </View>
+    </View>
+  );
   return (
-    <Modal
+    <SafeAreaView style={{margin: 5}}>
+      <Modal
       transparent={true}
       visible={modalVisible}
       onRequestClose={() => {
@@ -53,60 +115,6 @@ const ModalView = () => {
         </View>
       </View>
     </Modal>
-  );
-};
-
-const Page2 = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const CardsData=()=>{
-    return(
-        <View
-        style={{
-          margin: 5,
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Image
-                source={User1}
-                style={{
-                  top: 5,
-                  height: 70,
-                  width: 70,
-                  borderRadius: 35,
-                  borderColor: 'gray',
-                  backgroundColor: 'gray',
-                  borderWidth: 1,
-                }}
-              />
-
-              <View style={{flex: 1, marginLeft: 20}}>
-                <Text style={{fontSize: 18}}>Saikrishna</Text>
-                <Text style={{fontSize: 14}}>User one</Text>
-                <Text style={{fontSize: 14}}>Normal</Text>
-                <Text style={{fontSize: 14}}>Sai.krishna0045@gmail.com</Text>
-              </View>
-              <View style={{flexDirection: 'row', margin: 10}}>
-                <TouchableOpacity>
-                  <Image
-                    style={{right: 20, height: 20, width: 20}}
-                    source={EditIcon}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setModalVisible(true)}>
-                  <Image style={{height: 20, width: 20}} source={DeleteIcon} />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-    )
-}
-  return (
-    <SafeAreaView style={{margin: 10}}>
-      {ModalView}
       {/* modal code here */}
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View style={{flexDirection: 'row'}}>
@@ -119,9 +127,13 @@ const Page2 = () => {
               padding: 10,
               borderColor: 'gray',
             }}
+            onChangeText={text => setQuery(text)}
+            value={query}
+            // placeholder="Search here..."
+    
             placeholder="Search Employees List"
           />
-          <View style={{margin: 1}}>
+          <View style={{}}>
             <Button
               title="+"
               color="#4287f5"
@@ -162,59 +174,12 @@ const Page2 = () => {
           margin: 5,
           marginTop: 10,
         }}></View>
-     <View style={{ flex: 1,flexDirection:'column',justifyContent:'space-between'}}>
+      <FlatList
+        data={filteredData}
+        keyExtractor={item => item.candidate_id}
+        renderItem={(renderItem)}
+      />
 
-<View style={{flex:1,flexDirection:'column',justifyContent:'space-between',alignItems:'stretch',}}>
-< Cards />
-< Cards />
-</View>
-
-
-     {/* <View
-        style={{
-          margin: 5,
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Image
-                source={User1}
-                style={{
-                  top: 5,
-                  height: 70,
-                  width: 70,
-                  borderRadius: 35,
-                  borderColor: 'gray',
-                  backgroundColor: 'gray',
-                  borderWidth: 1,
-                }}
-              />
-
-              <View style={{flex: 1, marginLeft: 20}}>
-                <Text style={{fontSize: 18}}>Saikrishna</Text>
-                <Text style={{fontSize: 14}}>User one</Text>
-                <Text style={{fontSize: 14}}>Normal</Text>
-                <Text style={{fontSize: 14}}>Sai.krishna0045@gmail.com</Text>
-              </View>
-              <View style={{flexDirection: 'row', margin: 10}}>
-                <TouchableOpacity>
-                  <Image
-                    style={{right: 20, height: 20, width: 20}}
-                    source={EditIcon}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setModalVisible(true)}>
-                  <Image style={{height: 20, width: 20}} source={DeleteIcon} />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View> */}
-    
-     </View>
-      
       {/* <Icons name="glass" size={60} color='red'/>
         <Icon1 name="code" size={60} color='red'/> */}
     </SafeAreaView>
@@ -286,6 +251,24 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
     fontSize: 20,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#f0f0f0',
+  },
+  item: {
+    backgroundColor: 'white',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    borderRadius: 5,
+  },
+  title1: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  title: {
+    fontSize: 14,
   },
 });
 export default Page2;
